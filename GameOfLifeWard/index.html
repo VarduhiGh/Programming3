@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Of Life With Dinosaur</title>
+    <style>
+        canvas {
+            margin-left: 33%;
+            margin-top: 10%;
+        }
+
+
+        body {
+    background-color: #173661;
+    color: #ccc;
+}
+
+h1 {
+    text-align: center;
+    font-family: serif;
+    font-size: 60px;
+}
+
+div {
+    width: 840px;
+    margin: 0 auto;
+}
+
+#controldiv {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 20px
+}
+
+#dinosaur {
+    margin-top: 30px;
+    text-align: center;
+    color: #c37ade;
+    font-size: 17px;
+}
+
+canvas {
+    border: 1px solid rgb(255, 255, 255);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #aa5bbefc;
+}
+
+
+
+input {
+    margin: 0;
+    border: 0;
+    font-family: gloock;
+    font-size: 20px;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+
+#startbutton {
+    width: 150px;
+    margin-right: 50
+}
+
+#rulesbutton {
+    width: 150px;
+    margin-right: 50
+}
+
+#aboutGamebutton {
+    width: 150px;
+    margin-right: 50
+}
+      
+
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js"></script>
+    <script src="grass.js"></script>
+    <script src="grassEater.js"></script>
+    <script src="predator.js"></script>
+    <script src="grind.js"></script>
+    <script src="alligator.js"></script>
+    <script src="dinosaur.js"></script>
+    <script src = "rulesGame.html"></script>
+    <script src = "elephant.js"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+
+    <h1>
+        Game of Life with Dinosaur
+    </h1>
+
+    <div id="controldiv">
+
+
+        <button  id="startbutton" onclick="run()">Start</button>
+        <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">
+            <button id="aboutGamebutton" > About Game</button>
+            <a href="file:///C:/Users/Admin/Desktop/GameOfLifeWard/rulesGame.html">
+            <button id="rulesbutton"  > <a href="rulesGame.html" style="text-decoration: none;"> Rules</a></button>
+           </a>
+        </a>
+    </div>
+
+    <div id="dinosaur">
+        <h4>
+            I don't know if Mr. Karlen will ever show anyone my game, but at least I won't give up․․. Your favorite
+            dinosaur.🦕
+        </h4>
+    </div>
+
+</body>
+
+</html>
