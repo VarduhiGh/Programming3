@@ -1,7 +1,6 @@
-class Grind{
+class Grind extends LivingCreature{
     constructor(x,y){
-        this.x = x
-        this.y = y
+        super(x,y)
         this.energy = 22
         this.directions = [ ];
     }
