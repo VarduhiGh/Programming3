@@ -3,8 +3,7 @@ var app = express();
 var server =require("http").Server(app);
 var io = require("socket.io")(server);
 var fs = require("fs");
-const Dinosaur = require("./dinosaur");
-const GrassEater = require("./grassEater");
+
 
 app.use(express.static("."));
 
@@ -131,6 +130,44 @@ function createObject(){
         }
 }
 
+io.sockets.emit("send matrix",matrix)
+
 }
 
-io.sockets.emit("send matrix",matrix)
+function game(){
+        
+
+        for (let i in grassArr) {
+                grassArr[i].mul()
+        }
+
+        for (let i in grassEaterArr) {
+                grassEaterArr[i].eat()
+        }
+
+        for (let i in predatorArr) {
+                predatorArr[i].eat()
+        }
+
+        for (let i in grindArr) {
+                grindArr[i].eat()
+        }
+        for (let i in alligArr) {
+                alligArr[i].eat()
+        }
+        for (let i in dinoArr) {
+                dinoArr[i].eat()
+        }
+        for (let i in elepArr) {
+                elepArr[i].eat()
+        }
+
+        io.sockets.emit("send matrix",matrix)
+
+}
+
+setInterval(game,500)
+
+io.on("connection",function(){
+        createObject()
+})

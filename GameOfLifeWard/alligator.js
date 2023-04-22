@@ -54,7 +54,7 @@ return found
 
     mul(){
         let emptyCell = this.chooseCell(0)
-        let newCell = emptyCell(Math.floor(Math.random) * emptyCell.length)
+        let newCell = emptyCell[Math.floor(Math.random) * emptyCell.length]
 
 
            if(newCell){
@@ -73,7 +73,7 @@ return found
  
     eat(){
         let emptyCell = this.chooseCell(1,2,3,4)
-        let newCell = emptyCell(Math.floor(Math.random) * emptyCell.length)
+        let newCell = emptyCell[Math.floor(Math.random) * emptyCell.length]
 
            if(newCell ){
                this.energy += 5
@@ -117,7 +117,7 @@ return found
 
      move(){
         let emptyCell = this.chooseCell(0)
-        let newCell = emptyCell(Math.floor(Math.random) * emptyCell.length)
+        let newCell = emptyCell[Math.floor(Math.random) * emptyCell.length]
 
 
             if(newCell){
