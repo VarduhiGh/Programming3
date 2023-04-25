@@ -58,8 +58,7 @@ return found
 
     mul(){
         let emptyCell = this.chooseCell(0)
-        let newCell = emptyCell[Math.floor(Math.random) * emptyCell.length]
-
+        let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length) ]
 
            if(newCell){
                 let newX = newCell[0]
@@ -77,7 +76,7 @@ return found
  
     eat(){
         let emptyCell = this.chooseCell(1,2,3,4,5)
-        let newCell = emptyCell[Math.floor(Math.random) * emptyCell.length]
+        let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length) ]
 
 
            if(newCell ){
@@ -127,7 +126,7 @@ return found
     
      move(){
         let emptyCell = this.chooseCell(0)
-        let newCell = emptyCell[Math.floor(Math.random) * emptyCell.length]
+        let newCell = emptyCell[Math.floor(Math.random() * emptyCell.length) ]
 
             if(newCell){
                 let newX = newCell[0]

@@ -15,7 +15,7 @@ server.listen(3000,function(){
     console.log("server is run");
 })
 ///matrix generator
-function matrixGenerator(matrixSize, grass, grassEater, predator, grind, alligator, dinosaur, elephant)
+function matrixGenerator(matrixSize, grass, grassEater, predator, grind, alligator, dinosaur, elephant, ichthyosaur)
  {
         var matrix = []
 
@@ -70,11 +70,17 @@ function matrixGenerator(matrixSize, grass, grassEater, predator, grind, alligat
                 let y = Math.floor(Math.random() * matrixSize)
                 matrix[y][x] = 7
         }
+        for (let i = 0; i < ichthyosaur; i++) {
+                let x = Math.floor(Math.random() * matrixSize)
+                let y = Math.floor(Math.random() * matrixSize)
+                matrix[y][x] = 8
+        }
         return matrix
 }
 
-matrix = matrixGenerator(20, 20, 20, 20, 20, 20, 20, 20)
+matrix = matrixGenerator(40, 35, 20, 20, 20, 20, 20, 20,18)
 
+io.sockets.emit("send matrix",matrix)
 
 ///Arrays
 grassArr = []
@@ -84,6 +90,7 @@ grindArr = []
 alligArr = []
 dinoArr = []
 elepArr = []
+ichthArr = []
 
 ///modules
 Grass =require("./grass")
@@ -93,6 +100,7 @@ Grind = require("./grind")
 Elephant = require("./elephant")
 Alligator = require("./alligator")
 Dinosaur = require("./dinosaur")
+Ichthyosaur = require("./ichthyosaur")
 
 
 ///object generation
@@ -124,6 +132,9 @@ function createObject(){
                 } else if (matrix[y][x] == 7) {
                         let elep = new Elephant(x, y)
                         elepArr.push(elep)
+                } else if (matrix[y][x] == 8) {
+                        let ichth = new Ichthyosaur(x, y)
+                        ichthArr.push(ichth)
                 }
 
 
@@ -136,7 +147,6 @@ io.sockets.emit("send matrix",matrix)
 
 function game(){
         
-
         for (let i in grassArr) {
                 grassArr[i].mul()
         }
@@ -161,6 +171,9 @@ function game(){
         for (let i in elepArr) {
                 elepArr[i].eat()
         }
+        for (let i in ichthArr) {
+                ichthArr[i].eat()
+        }
 
         io.sockets.emit("send matrix",matrix)
 
@@ -170,4 +183,17 @@ setInterval(game,500)
 
 io.on("connection",function(){
         createObject()
+})
+
+var statistic = {}
+
+setInterval(function(){
+        statistic.grass = grassArr.length
+        statistic.grassEater = grassEaterArr.length
+        statistic.grind = grindArr.length
+        statistic.Predator = predatorArr.length
+        statistic.alligator = alligArr.length
+        statistic.dinosaur = dinoArr.length
+        statistic.elephant = elepArr.length
+        statistic.ichthyosaur = ichthArr.length
 })

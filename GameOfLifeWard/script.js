@@ -1,5 +1,5 @@
 var socket = io()
-let side = 35
+let side = 40
 
 
 function run() {
@@ -25,6 +25,8 @@ function changeColor(matrix) {
                         } else if (matrix[y][x] == 6) {
                                 fill("white")
                         } else if (matrix[y][x] == 7) {
+                                fill("brown")
+                        }else if (matrix[y][x] == 8) {
                                 fill("black")
                         }
                         else {
@@ -38,3 +40,4 @@ function changeColor(matrix) {
 
 
 socket.on("send matrix",changeColor)
+
