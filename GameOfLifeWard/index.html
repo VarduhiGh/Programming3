@@ -6,83 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Of Life With Dinosaur</title>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js"></script>
-    <script src="script.js"></script>
+    
 
     <style>
-        canvas {
-            margin-left: 33%;
-            margin-top: 10%;
-        }
-
-
-        body {
-    background-color: #173661;
-    color: #ccc;
-}
-
-h1 {
-    text-align: center;
-    font-family: serif;
-    font-size: 60px;
-}
-
-div {
-    width: 840px;
-    margin: 0 auto;
-}
-
-#controldiv {
-    text-align: center;
-    font-family: sans-serif;
-    font-size: 20px
-}
-
-#dinosaur {
-    margin-top: 30px;
-    text-align: center;
-    color: #c37ade;
-    font-size: 17px;
-}
-
-canvas {
-    border: 1px solid rgb(255, 255, 255);
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: #aa5bbefc;
-}
-
-
-
-input {
-    margin: 0;
-    border: 0;
-    font-family: gloock;
-    font-size: 20px;
-    background-color: #000000;
-    color: #ffffff;
-}
-
-
-#startbutton {
-    width: 150px;
-    margin-right: 50
-}
-
-#rulesbutton {
-    width: 150px;
-    margin-right: 50
-}
-
-#aboutGamebutton {
-    width: 150px;
-    margin-right: 50
-}
-      
 
     </style>
 
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -111,6 +41,27 @@ input {
         </h4>
     </div>
 
+    <div class="all__botton">
+        <button onclick="AddGrass()" class="add__botton" style="background-color: rgb(110, 205, 110);">Add Grass</button>
+        <button onclick="AddGrassEater()" class="add__botton" style="background-color: yellow;">Add GrassEater</button>
+        <button onclick="AddPredator()" class="add__botton" style="background-color: red;">Add Predator</button>
+        <button onclick="AddGrind()" class="add__botton" style="background-color: blue;">Add Grind</button>
+        <button onclick="AddAlligator()" class="add__botton" style="background-color: purple;">Add Alligator</button>
+        <button onclick="AddDinosaur()" class="add__botton" style="background-color: white;">Add Dinosaur</button>
+        <button onclick="AddElephant()" class="add__botton" style="background-color: rgb(87, 129, 202);">Add Elephant</button>
+        <button onclick="AddIchthyosour()" class="add__botton" style="background-color: rgb(240, 28, 124);">Add Ichthyosour</button>
+        <button onclick="Kill()" class="add__botton" style="background-color: gray;">Kill</button>
+    
+    </div>
+    <div class="exanak__btns">
+        <button onclick="Spring()" class="btn__exanak" style="background-color: rgb(149, 255, 87)">Spring</button>
+        <button onclick="Summer()" class="btn__exanak" style="background-color: #e24545">Summer</button>
+        <button onclick="Autumn()" class="btn__exanak" style="background-color: #ebfb36e1">Autumn</button>
+        <button onclick="Winter()" class="btn__exanak" style="background-color: #a6cdf5ce">Winter</button>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.5.0/lib/p5.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

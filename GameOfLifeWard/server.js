@@ -3,6 +3,7 @@ var app = express();
 var server =require("http").Server(app);
 var io = require("socket.io")(server);
 var fs = require("fs");
+const { kill } = require('process');
 
 
 app.use(express.static("."));
@@ -179,21 +180,194 @@ function game(){
 
 }
 
-setInterval(game,500)
+setInterval(game,750)
 
-io.on("connection",function(){
-        createObject()
-})
 
-var statistic = {}
+var weath;
 
-setInterval(function(){
-        statistic.grass = grassArr.length
-        statistic.grassEater = grassEaterArr.length
-        statistic.grind = grindArr.length
-        statistic.Predator = predatorArr.length
-        statistic.alligator = alligArr.length
-        statistic.dinosaur = dinoArr.length
-        statistic.elephant = elepArr.length
-        statistic.ichthyosaur = ichthArr.length
-})
+function Winter() {
+    weath = "winter";
+    io.sockets.emit('Winter', weath);
+}
+
+function Summer() {
+    weath = "summer";
+    io.sockets.emit('Summer', weath);
+}
+
+function Spring() {
+    weath = "spring";
+    io.sockets.emit('Spring', weath);
+}
+function Autumn() {
+    weath = "autumn";
+    io.sockets.emit('Autumn', weath);
+}
+
+function Kill() {
+        grassArr = [];
+        grassEaterArr = [];
+        predatorArr = [];
+        grindArr = [];
+        alligArr = [];
+        dinoArr = [];
+        elepArr = [];
+        ichthArr = [];
+        for (var y = 0; y < matrix.length; y++) {
+            for (var x = 0; x < matrix[y].length; x++) {
+                matrix[y][x] = 0;
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+    function AddGrass() {
+        for (var i = 0; i < 60; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 1;
+                var gr = new Grass(x, y);
+                grassArr.push(gr);
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+    function AddGrassEater() {
+        let count = 0;
+        for (var i = 0; i < 50; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (count < 7) {
+                if (i < 30) {
+                    if (matrix[y][x] == 0) {
+                        count++;
+                        matrix[y][x] = 2;
+                        var grEater = new GrassEater(x, y);
+                        grassEaterArr.push(grEater);
+                    }
+    
+                } else if (i >= 30) {
+                    if (matrix[y][x] == 0 || matrix[y][x] == 1) {
+                        count++;
+                        matrix[y][x] = 2;
+                        var grEater = new GrassEater(x, y);
+                        grassEaterArr.push(grEater);
+                    }
+                }
+            }
+    
+    
+        }
+    
+        io.sockets.emit("send matrix", matrix);
+    }
+    function AddPredator() {
+        for (var i = 0; i < 25; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 3;
+                var predator = new Predator(x, y);
+                predatorArr.push(predator);
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+    function AddGrind() {
+        for (var i = 0; i < 7; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 4;
+                var grind = new Grind(x, y);
+                grindArr.push(grind);
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+    
+    function AddAlligator() {
+        for (var i = 0; i < 7; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 5;
+                var allig = new Alligator(x, y);
+                alligArr.push(allig);
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+    
+    function AddDinosaur() {
+        for (var i = 0; i < 7; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 6;
+                var dinosaur = new Dinosaur(x, y);
+                dinoArr.push(dinosaur);
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+    
+    function AddElephant() {
+        for (var i = 0; i < 7; i++) {
+            var x = Math.floor(Math.random() * matrix[0].length)
+            var y = Math.floor(Math.random() * matrix.length)
+            if (matrix[y][x] == 0) {
+                matrix[y][x] = 7;
+                var elephant = new Elephant(x, y);
+                elepArr.push(elephant);
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+
+    function AddIchthyosour() {
+            for (var i = 0; i < 8; i++) {
+                    var x = Math.floor(Math.random() * matrix[0].length)
+                    var y = Math.floor(Math.random() * matrix.length)
+                    if (matrix[y][x] == 0) {
+                            matrix[y][x] = 8;
+                            var ichthy = new Ichthyosaur(x, y);
+                            ichthArr.push(ichthy);
+                            console.log( ichthArr.length);
+            }
+        }
+        io.sockets.emit("send matrix", matrix);
+    }
+
+io.on('connection', function (socket) {
+        createObject();
+        socket.on("spring", Spring);
+        socket.on("summer", Summer);
+        socket.on("autumn", Autumn);
+        socket.on("winter", Winter);
+        socket.on("addgrass", AddGrass);
+        socket.on("addgrassEater", AddGrassEater);
+        socket.on("addpredator", AddPredator);
+        socket.on("addgrind", AddGrind);
+        socket.on("addalligator", AddAlligator);
+        socket.on("adddinosaur", AddDinosaur);
+        socket.on("addelephant", AddElephant);
+        socket.on("addichthyosaur", AddIchthyosour);
+        socket.on("kill", Kill);
+
+
+    })
+    
+
+// var statistic = {}
+
+// setInterval(function(){
+//         statistic.grass = grassArr.length
+//         statistic.grassEater = grassEaterArr.length
+//         statistic.grind = grindArr.length
+//         statistic.Predator = predatorArr.length
+//         statistic.alligator = alligArr.length
+//         statistic.dinosaur = dinoArr.length
+//         statistic.elephant = elepArr.length
+//         statistic.ichthyosaur = ichthArr.length
+// })
